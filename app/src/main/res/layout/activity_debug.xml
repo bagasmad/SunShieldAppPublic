@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DebugActivity">
+    <LinearLayout
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/textCuaca"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Cuaca:" />
+
+        <TextView
+            android:id="@+id/textSuhu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Suhu:"/>
+
+        <TextView
+            android:id="@+id/textJam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Jam:"/>
+        <TextView
+            android:id="@+id/kotaResponse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Kota:"/>
+        <TextView
+            android:id="@+id/uvResponse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="uvIndex:"/>
+        <TextView
+            android:id="@+id/uvMax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="uvMax:"/>
+        <TextView
+            android:id="@+id/saranResponse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Saran:"/>
+        <Button
+            android:onClick="alarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Test Remind in 10 second"
+            android:id="@+id/Button"
+            />
+        <Button
+            android:onClick="Homepage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Go To Homepage"
+            android:id="@+id/ButtonHomePage"
+            />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

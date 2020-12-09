@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorWhite"
+    tools:context=".MainActivity">
+    <android.support.constraint.ConstraintLayout
+        android:paddingTop="33dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="33dp"
+        android:layout_marginEnd="33dp">
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/haloPenggunaPart1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="22sp"
+                android:text="Halo, "
+                android:fontFamily="@font/nunito_bold"
+                android:layout_marginStart="15dp"
+                />
+            <TextView
+                android:id="@+id/haloPenggunaPart2"
+                app:layout_constraintStart_toEndOf="@id/haloPenggunaPart1"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_bold"
+                android:textSize="22sp"
+                android:textColor="@color/colorAccent"
+                android:text="Pengguna!"
+                />
+            <ImageButton
+                android:onClick="Settings"
+                android:id="@+id/settingsButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_settings"
+                android:background="@android:color/transparent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/haloPenggunaPart2"/>
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/layoutCuaca"
+                android:layout_width="346dp"
+                android:layout_height="wrap_content"
+                android:minHeight="189dp"
+                android:background="@drawable/ic_backgroundsuhu"
+                app:layout_constraintTop_toBottomOf="@id/haloPenggunaPart1"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="22dp">
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/ic_boxinformasi"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Suhu"
+                        android:textColor="@color/colorPrimaryDark" />
+
+                    <TextView
+                        android:id="@+id/teksSuhu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:fontFamily="@font/nunito_bold"
+                        android:text="00.00° C"
+                        android:textColor="@android:color/white"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:text="Index UV"
+                        android:textColor="@color/colorPrimaryDark" />
+
+                    <TextView
+                        android:id="@+id/teksIndexUV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:fontFamily="@font/nunito_bold"
+                        android:text="0"
+                        android:textColor="@android:color/white"
+                        android:textSize="30sp" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/gambarCuaca"
+                    android:layout_width="108dp"
+                    android:layout_height="76dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="21dp"
+                    android:src="@drawable/ic_cuacacerahberawan"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/teksLokasi"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="11dp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="Placeholder, Location Here"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/gambarCuaca" />
+                <TextView
+                    android:id="@+id/teksTanggal"
+                    app:layout_constraintTop_toBottomOf="@id/teksLokasi"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_bold"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/white"
+                    android:text="Tanggal Goes Here"/>
+
+                <TextView
+                    android:id="@+id/teksPrediksi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginBottom="21dp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="cuaca goes here"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/teksTanggal"
+                    app:layout_constraintVertical_bias="0.0" />
+
+
+            </android.support.constraint.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/buttonIngatkan"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                app:layout_constraintTop_toBottomOf="@id/layoutCuaca"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="160dp"
+                android:layout_height="64dp"
+                android:layout_marginTop="36dp"
+                android:background="@drawable/ic_buttoningatkanorange"
+                android:onClick="Ingatkan">
+                <TextView
+                    android:id="@+id/teksIngatkan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_bold"
+                    android:textSize="18sp"
+                    android:text="Ingatkan"
+                    android:textColor="@android:color/white"
+                    android:layout_marginTop="17dp" />
+                <ImageView
+                    android:layout_width="33dp"
+                    android:layout_height="33dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/ic_alarm"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/buttonDiagnosis"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                app:layout_constraintTop_toBottomOf="@id/layoutCuaca"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="36dp"
+                android:layout_width="160dp"
+                android:layout_height="64dp"
+                android:background="@drawable/ic_buttondiagnosis">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_bold"
+                    android:textSize="18sp"
+                    android:text="Diagnosis"
+                    android:textColor="@android:color/white"
+                    android:layout_marginTop="17dp" />
+                <ImageView
+                    android:layout_width="33dp"
+                    android:layout_height="33dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/ic_camera"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:id="@+id/LinearLayoutChronometer"
+                app:layout_constraintTop_toBottomOf="@id/buttonIngatkan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_timerbackground"
+                android:layout_marginTop="36dp"
+                android:visibility="visible">
+                <TextView
+                    android:id="@+id/chronometer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="00:00"
+                    android:textSize="50sp"
+                    android:fontFamily="@font/nunito_regular"
+                    android:textColor="@android:color/tertiary_text_light"/>
+            </LinearLayout>
+
+            <android.support.v7.widget.CardView
+                app:cardCornerRadius="10dp"
+                android:id="@+id/infoCard"
+                app:layout_constraintTop_toBottomOf="@id/LinearLayoutChronometer"
+                android:layout_marginTop="36dp"
+                app:layout_constraintBottom_toTopOf="@id/debugButton"
+                android:layout_marginBottom="33dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal">
+                    <LinearLayout
+                        android:layout_marginTop="36dp"
+                        android:layout_width="290dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_tipscard"
+                        android:gravity="center_vertical">
+                        <TextView
+                            android:id="@+id/teksRekomendasiUV"
+                            android:layout_width="180dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunito_regular"
+                            android:textColor="@android:color/tertiary_text_light"
+                            android:text="Index UV tinggi, gunakan sunscreen"
+                            android:textSize="15sp"
+                            android:layout_marginStart="23dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginBottom="12dp"
+                            />
+                        <ImageView
+                            android:layout_width="49dp"
+                            android:layout_height="49dp"
+                            android:layout_marginStart="23dp"
+                            android:src="@drawable/ic_gambaruv"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginTop="36dp"
+                        android:layout_width="290dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_tipscard"
+                        android:gravity="center_vertical">
+                        <TextView
+                            android:id="@+id/teksRekomendasiAktivitas"
+                            android:layout_width="180dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunito_regular"
+                            android:textColor="@android:color/tertiary_text_light"
+                            android:text="Kurangi aktivitas luar ruangan berlebih"
+                            android:textSize="15sp"
+                            android:layout_marginStart="23dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginBottom="12dp"
+                            />
+                        <ImageView
+                            android:layout_width="49dp"
+                            android:layout_height="49dp"
+                            android:layout_marginStart="23dp"
+                            android:src="@drawable/ic_gambaraktivitas"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginTop="36dp"
+                        android:layout_width="290dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_tipscard"
+                        android:gravity="center_vertical">
+                        <TextView
+                            android:id="@+id/teksRekomendasiAtribut"
+                            android:layout_width="180dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunito_regular"
+                            android:textColor="@android:color/tertiary_text_light"
+                            android:text="Gunakan topi dan kacamata UV"
+                            android:textSize="15sp"
+                            android:layout_marginStart="23dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginBottom="12dp"
+                            />
+                        <ImageView
+                            android:layout_width="49dp"
+                            android:layout_height="49dp"
+                            android:layout_marginStart="23dp"
+                            android:src="@drawable/ic_gambaratribut"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginTop="36dp"
+                        android:layout_marginBottom="36dp"
+                        android:layout_width="290dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_tipscard"
+                        android:gravity="center_vertical">
+                        <TextView
+                            android:id="@+id/teksRekomendasiPrediksi"
+                            android:layout_width="180dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunito_regular"
+                            android:textColor="@android:color/tertiary_text_light"
+                            android:text="Hari kemungkinan hujan, jangan lupa membawa payung"
+                            android:textSize="15sp"
+                            android:layout_marginStart="23dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginBottom="12dp"
+                            />
+                        <ImageView
+                            android:layout_width="49dp"
+                            android:layout_height="49dp"
+                            android:layout_marginStart="23dp"
+                            android:src="@drawable/ic_gambarprediksi"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+            <Button
+                android:id="@+id/debugButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DEBUG"
+                android:onClick="Debug"
+                app:layout_constraintTop_toBottomOf="@id/infoCard"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="20dp"/>
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>
