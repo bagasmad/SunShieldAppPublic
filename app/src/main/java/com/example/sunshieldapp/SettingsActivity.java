@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Chronometer;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -27,6 +28,13 @@ public class SettingsActivity extends AppCompatActivity {
         int hours = (MainActivity.time)/3600000;
         int minutes = ((MainActivity.time)%3600000)/60000;
         updateViews(hours,minutes);
+        TextView bantuan = findViewById(R.id.bantuan);
+        bantuan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OnBoarding();
+            }
+        });
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -92,5 +100,10 @@ public class SettingsActivity extends AppCompatActivity {
             }
 
         }
+    }
+
+    public void OnBoarding() {
+        Intent intent = new Intent(this, OnBoardingActivity.class);
+        startActivity(intent);
     }
 }

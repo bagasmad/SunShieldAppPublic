@@ -1,17 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/colorWhite"
     tools:context=".OnBoardingActivity">
-    <android.support.constraint.ConstraintLayout
-        android:paddingTop="33dp"
+    <ViewFlipper
+        android:id="@+id/ViewFlipper"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="33dp"
-        android:layout_marginEnd="33dp">
-    </android.support.constraint.ConstraintLayout>
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/child1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/onBoarding1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="80dp"
+                android:layout_width="306dp"
+                android:layout_height="271dp"
+                android:src="@drawable/onboarding1"/>
+            <TextView
+                android:id="@+id/header1"
+                android:layout_width="306dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/onBoarding1"
+                app:layout_constraintStart_toStartOf="@id/onBoarding1"
+                app:layout_constraintEnd_toEndOf="@id/onBoarding1"
+                android:text="Beraktivitas di luar ruangan tanpa khawatir"
+                android:textSize="27sp"
+                android:fontFamily="@font/nunito_bold"
+                android:textAlignment="center"/>
+            <TextView
+                android:id="@+id/body1"
+                android:layout_width="306dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/header1"
+                app:layout_constraintStart_toStartOf="@id/onBoarding1"
+                app:layout_constraintEnd_toEndOf="@id/onBoarding1"
+                android:layout_marginTop="14dp"
+                android:text="Sunshield akan mengingatkanmu untuk selalu memakai sunscreen"
+                android:textSize="18sp"
+                android:fontFamily="@font/nunito_regular"
+                android:textAlignment="center"/>
+        </android.support.constraint.ConstraintLayout>
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/child2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/onBoarding2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="80dp"
+                android:layout_width="306dp"
+                android:layout_height="271dp"
+                android:src="@drawable/onboarding2"/>
+            <TextView
+                android:id="@+id/header2"
+                android:layout_width="306dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/onBoarding2"
+                app:layout_constraintStart_toStartOf="@id/onBoarding2"
+                app:layout_constraintEnd_toEndOf="@id/onBoarding2"
+                android:text="Atur pengingat untuk memakai sunscreen"
+                android:textSize="27sp"
+                android:fontFamily="@font/nunito_bold"
+                android:textAlignment="center"/>
+            <TextView
+                android:id="@+id/body2"
+                android:layout_width="306dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/header2"
+                app:layout_constraintStart_toStartOf="@id/onBoarding2"
+                app:layout_constraintEnd_toEndOf="@id/onBoarding2"
+                android:layout_marginTop="14dp"
+                android:text="Notifikasi akan diberikan sesuai waktu yang kamu inginkan"
+                android:textSize="18sp"
+                android:fontFamily="@font/nunito_regular"
+                android:textAlignment="center"/>
+        </android.support.constraint.ConstraintLayout>
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/child3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/onBoarding3"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="80dp"
+                android:layout_width="306dp"
+                android:layout_height="271dp"
+                android:src="@drawable/onboarding3"/>
+            <TextView
+                android:id="@+id/header3"
+                android:layout_width="306dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/onBoarding3"
+                app:layout_constraintStart_toStartOf="@id/onBoarding3"
+                app:layout_constraintEnd_toEndOf="@id/onBoarding3"
+                android:text="Dapatkan informasi mengenai suhu dan cuaca"
+                android:textSize="27sp"
+                android:fontFamily="@font/nunito_bold"
+                android:textAlignment="center"/>
+            <TextView
+                android:id="@+id/body3"
+                android:layout_width="306dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/header3"
+                app:layout_constraintStart_toStartOf="@id/onBoarding3"
+                app:layout_constraintEnd_toEndOf="@id/onBoarding3"
+                android:layout_marginTop="14dp"
+                android:text="Serta tips-tips menarik sesuai cuaca di wilayahmu!"
+                android:textSize="18sp"
+                android:fontFamily="@font/nunito_regular"
+                android:textAlignment="center"/>
+            <Button
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/buttonMulai"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@id/body3"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="Mulai"
+                android:fontFamily="@font/nunito_bold"
+                android:textColor="@color/colorWhite"
+                android:background="@drawable/ic_buttoningatkanorange"
+                />
+        </android.support.constraint.ConstraintLayout>
+    </ViewFlipper>
+    <LinearLayout
+        app:layout_constraintTop_toBottomOf="@id/ViewFlipper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
 
-</ScrollView>
+        <Button
+            android:id="@+id/buttonPrevs"
+            android:layout_width="180dp"
+            android:layout_height="200dp"
+            android:scaleX="-0.2"
+            android:scaleY="0.2"
+            android:background="@drawable/ic_next"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ViewFlipper" />
+
+        <Button
+            android:id="@+id/buttonNext"
+            android:layout_width="180dp"
+            android:layout_height="200dp"
+            android:background="@drawable/ic_next"
+            android:scaleX="0.2"
+            android:scaleY="0.2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ViewFlipper" />
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.sunshieldapp">
-
+    <uses-feature android:name="android.hardware.camera2"
+        android:required="true"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission. ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -13,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".OnBoardingActivity"></activity>
+        <activity android:name=".DiagnoseActivity"></activity>
+        <activity android:name=".OnBoardingActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".DebugActivity" />
         <activity android:name=".MainActivity">

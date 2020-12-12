@@ -8,6 +8,7 @@ import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -46,6 +47,8 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.Date;
 
+import static android.view.View.GONE;
+
 public class MainActivity extends AppCompatActivity {
     public MediaPlayer mediaPlayer;
     private LocationManager locationManager;
@@ -59,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                callGPS();
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
             }
         }
@@ -69,14 +73,25 @@ public class MainActivity extends AppCompatActivity {
         createNotificationChannel();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homescreen);
-        //callGPS();
-        //callAPI(Double.toString(presentLocation.getLatitude()), Double.toString(presentLocation.getLongitude()) ,this);
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            callGPS();
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+            callAPI(Double.toString(presentLocation.getLatitude()), Double.toString(presentLocation.getLongitude()) ,this);
+        }
         Date currentTime = Calendar.getInstance().getTime();
         String date = DateFormat.getDateInstance().format(currentTime);
         TextView tanggal = findViewById(R.id.teksTanggal);
         tanggal.setText(date);
         LoadTime();
+        LinearLayout buttonIngatkan = findViewById(R.id.buttonIngatkan);
+        buttonIngatkan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Ingatkan(v);
+            }
+        });
         Log.i("Test", UserClass.SHARED_PREFS);
+        OnBoarding();
 
     }
 
@@ -91,11 +106,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.homescreen);
         locationManager = (LocationManager) this.getSystemService(getApplicationContext().LOCATION_SERVICE);
         locationListener = new LocationListener() {
+            //Trigger yang akan berubah ketika lokasi berganti
             @Override
             public void onLocationChanged(Location location) {
                 presentLocation = location;
-                //textView.setText(presentLocation.getLatitude()+","+ presentLocation.getLongitude());
-                //callAPI(Double.toString(presentLocation.getLatitude()), Double.toString(presentLocation.getLongitude()) ,textView);
             }
 
             @Override
@@ -120,8 +134,6 @@ public class MainActivity extends AppCompatActivity {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
             presentLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         }
-        //textView.setText(presentLocation.getLatitude()+","+ presentLocation.getLongitude());
-
     }
 
     public void callAPI(String a, String b, final Activity activity) {
@@ -132,10 +144,9 @@ public class MainActivity extends AppCompatActivity {
         final TextView teksUV = activity.findViewById(R.id.teksIndexUV);
         final String[] deskripsi = new String[1];
         final String[] suhu = new String[1];
-        final Double[] codeUV = new Double[1];
         String uvUrl = "https://api.openuv.io/api/v1/uv?lat=" + a + "&lng=" + b;
-        String urlGoogle = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + a + "," + b + "&key=AIzaSyBmSKL6T0nKvFck1pnjcDt6sSHFO79cP4M";
-        String url = "https://api.openweathermap.org/data/2.5/onecall?lat=" + a + "&" + "lon=" + b + "&exclude=minutely,hourly,daily,alerts&lang=id&units=metric&appid=84458e6a9721248d598d4f5e775694d9";
+        String urlGoogle = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + a + "," + b + "&key=AIzaSyA-55lZSPbg4P4hyXwD6SlTRGvaBxWh2ME";
+        String url = "https://api.openweathermap.org/data/2.5/onecall?lat=" + a + "&" + "lon=" + b + "&exclude=minutely,hourly,alerts&lang=id&units=metric&appid=bf7fb2daf9967369f55ff97981b61a34";
 
         //CallOpenWeather for weather information
         new AsyncHttpClient().get(url, new AsyncHttpResponseHandler() {
@@ -146,10 +157,19 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject reader = new JSONObject(stringJSON);
                     JSONObject current = reader.getJSONObject("current");
                     JSONArray cuacaArray = current.getJSONArray("weather");
+                    final int cuacaHariIni = reader.getJSONArray("daily").getJSONObject(0).getJSONArray("weather").getJSONObject(0).getInt("id");
+                    final int cuacaCurrent = cuacaArray.getJSONObject(0).getInt("id");
                     deskripsi[0] = cuacaArray.getJSONObject(0).getString("description");
                     suhu[0] = current.getString("temp");
                     teksCuaca.setText(deskripsi[0]);
                     teksSuhu.setText(suhu[0] + "°" + "C");
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            WeatherClass.setKodeCuacaForecast(cuacaHariIni, activity);
+                            WeatherClass.setKodeCuacaCurrent(cuacaCurrent, activity);
+                        }
+                    });
 
 
                 } catch (Exception e) {
@@ -159,7 +179,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("ResponseAPICuaca", stringJSON);
 
             }
-
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
@@ -191,15 +210,13 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject reader = new JSONObject(uvResponse);
                     JSONObject result = reader.getJSONObject("result");
                     final String uv = result.getString("uv");
-                    codeUV[0] = Double.parseDouble(uv);
-
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             teksUV.setText(uv);
+                            WeatherClass.setIndexUV(Double.parseDouble(uv),activity);
                         }
                     });
-
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -226,10 +243,6 @@ public class MainActivity extends AppCompatActivity {
                             kota.add(components.getJSONObject(i).getString("long_name"));
                         } else {
                             Log.i("hehe", components.getJSONObject(i).getJSONArray("types").get(0).toString());
-                            //responseKota.setText("masi error");
-//                            String kota = components.getJSONObject(i).getString("long_name");
-//                            Log.i("kota",kota);
-//                            responseKota.setText(kota);
                         }
                     }
 
@@ -251,22 +264,21 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void pushNotification(View view) {
+    public void pushNotification() {
         Toast.makeText(MainActivity.this, "Reminder Set", Toast.LENGTH_LONG).show();
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        long timeAtButtonClick = System.currentTimeMillis();
-        long secondsInMillis = 2 * 60 * 1000;
+        long timeAtTrigger = System.currentTimeMillis();
         Intent intent = new Intent(MainActivity.this, ReminderBroadcast.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent, 0);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, timeAtButtonClick + secondsInMillis, pendingIntent);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, timeAtTrigger, pendingIntent);
     }
 
     private void createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.BASE) {
-            CharSequence name = "Reminder";
-            String description = "Channel for Reminder Timer";
+            CharSequence name = "SunShieldApp";
+            String description = "Channel for SunShieldApp";
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel("notifyMe", name, importance);
+            NotificationChannel channel = new NotificationChannel("SunShieldApp", name, importance);
             channel.setDescription(description);
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
@@ -278,13 +290,79 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void Ingatkan(View view) {
+    public void Ingatkan(final View view) {
+        LinearLayout timerLayout = findViewById(R.id.LinearLayoutChronometer);
+        timerLayout.setVisibility(View.VISIBLE);
+        LinearLayout linearLayout = (LinearLayout) view;
         LoadTime();
         final int millisInFuture = time;
         int hours = millisInFuture / 3600000;
         int minutes = (millisInFuture % 3600000) / 60000;
         Log.i("hours", Integer.toString(hours));
         Log.i("minutes", Integer.toString(minutes));
+        changeTimer(hours,minutes);
+        final CountDownTimer timer = new CountDownTimer(millisInFuture, 60000) {
+            void setText(long millisUntilFinished)
+            {
+                Log.i("Millis", Long.toString(millisUntilFinished));
+                int hours = (int) (millisUntilFinished / 3600000);
+                Log.i("Modulo", Long.toString(millisUntilFinished % 3600000));
+                int minutes = (int) Math.round(millisUntilFinished % 3600000 / 60000.0);
+                if (minutes >= 60) {
+                    hours++;
+                    minutes = 0;
+                }
+                changeTimer(hours,minutes);
+            }
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                setText(millisUntilFinished);
+            }
+
+            @Override
+            public void onFinish() {
+                setText(0);
+                mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.alarm);
+                mediaPlayer.start();
+                pushNotification();
+
+            }
+
+        }.start();
+        linearLayout.setBackground(getDrawable(R.drawable.ic_hentikan));
+        TextView textView = linearLayout.findViewById(R.id.teksIngatkan);
+        textView.setText("Hentikan");
+        LinearLayout buttonIngatkan = findViewById(R.id.buttonIngatkan);
+        buttonIngatkan.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Batalkan(v);
+                timer.cancel();
+            }
+        });
+    }
+
+    public void Batalkan(View view)
+    {
+        LinearLayout timerLayout = findViewById(R.id.LinearLayoutChronometer);
+        timerLayout.setVisibility(GONE);
+        LinearLayout linearLayout = (LinearLayout) view;
+        linearLayout.setBackground(getDrawable(R.drawable.ic_buttoningatkanorange));
+        TextView textView = linearLayout.findViewById(R.id.teksIngatkan);
+        textView.setText("Ingatkan");
+        linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Ingatkan(v);
+            }
+        });
+    }
+
+    public void changeTimer(int hours, int minutes)
+    {
         final TextView chronometer = findViewById(R.id.chronometer);
         if (hours >= 10) {
             if (minutes < 10) {
@@ -300,53 +378,11 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
+    }
 
-        new CountDownTimer(millisInFuture, 60000) {
-            void setText(long millisUntilFinished) {
-                Log.i("Millis", Long.toString(millisUntilFinished));
-                int hours = (int) (millisUntilFinished / 3600000);
-                Log.i("Modulo", Long.toString(millisUntilFinished % 3600000));
-                int minutes = (int) Math.round(millisUntilFinished % 3600000 / 60000.0);
-                if (minutes >= 60) {
-                    hours++;
-                    minutes = 0;
-                }
-                Log.i("hours2", Integer.toString(hours));
-                Log.i("minutes2", Integer.toString(minutes));
-                if (hours >= 10) {
-                    if (minutes < 10) {
-                        chronometer.setText(hours + ":" + "0" + minutes);
-                    } else {
-                        chronometer.setText(hours + ":" + minutes);
-                    }
-                } else {
-                    if (minutes < 10) {
-                        chronometer.setText("0" + hours + ":" + "0" + minutes);
-                    } else {
-                        chronometer.setText("0" + hours + ":" + minutes);
-                    }
-
-                }
-            }
-
-            @Override
-            public void onTick(long millisUntilFinished) {
-                setText(millisUntilFinished);
-            }
-
-            @Override
-            public void onFinish() {
-                setText(0);
-                mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.alarm);
-                mediaPlayer.start();
-
-            }
-        }.start();
-        LinearLayout linearLayout = (LinearLayout) view;
-        linearLayout.setBackground(getDrawable(R.drawable.ic_hentikan));
-        TextView textView = linearLayout.findViewById(R.id.teksIngatkan);
-        textView.setText("Hentikan");
-        pushNotification(view);
+    public void LoadTime() {
+        SharedPreferences sharedPreferences = getSharedPreferences(UserClass.SHARED_PREFS, MODE_PRIVATE);
+        time = sharedPreferences.getInt(UserClass.TIME, 7200000);
     }
 
     public void Settings(View view) {
@@ -354,9 +390,16 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void LoadTime() {
-        SharedPreferences sharedPreferences = getSharedPreferences(UserClass.SHARED_PREFS, MODE_PRIVATE);
-        time = sharedPreferences.getInt(UserClass.TIME, 7200000);
+    public void OnBoarding() {
+        Intent intent = new Intent(this, OnBoardingActivity.class);
+        startActivity(intent);
     }
+
+    public void Diagnose(View view) {
+        Intent intent = new Intent(this, DiagnoseActivity.class);
+        startActivity(intent);
+    }
+
+
 }
 

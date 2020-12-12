@@ -10,8 +10,8 @@
         android:paddingTop="33dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="33dp"
-        android:layout_marginEnd="33dp">
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp">
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -48,12 +48,13 @@
                 app:layout_constraintBottom_toBottomOf="@id/haloPenggunaPart2"/>
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/layoutCuaca"
-                android:layout_width="346dp"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="189dp"
                 android:background="@drawable/ic_backgroundsuhu"
                 app:layout_constraintTop_toBottomOf="@id/haloPenggunaPart1"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="22dp">
 
                 <LinearLayout
@@ -132,7 +133,7 @@
                     app:layout_constraintTop_toBottomOf="@id/teksLokasi"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="30dp"
-                    android:layout_width="wrap_content"
+                    android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nunito_bold"
                     android:textSize="14sp"
@@ -141,7 +142,7 @@
 
                 <TextView
                     android:id="@+id/teksPrediksi"
-                    android:layout_width="wrap_content"
+                    android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
                     android:layout_marginBottom="21dp"
@@ -166,8 +167,7 @@
                 android:layout_width="160dp"
                 android:layout_height="64dp"
                 android:layout_marginTop="36dp"
-                android:background="@drawable/ic_buttoningatkanorange"
-                android:onClick="Ingatkan">
+                android:background="@drawable/ic_buttoningatkanorange">
                 <TextView
                     android:id="@+id/teksIngatkan"
                     android:layout_width="wrap_content"
@@ -195,7 +195,8 @@
                 android:layout_marginTop="36dp"
                 android:layout_width="160dp"
                 android:layout_height="64dp"
-                android:background="@drawable/ic_buttondiagnosis">
+                android:background="@drawable/ic_buttondiagnosis"
+                android:onClick="Diagnose">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -221,7 +222,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_timerbackground"
                 android:layout_marginTop="36dp"
-                android:visibility="visible">
+                android:visibility="gone">
                 <TextView
                     android:id="@+id/chronometer"
                     android:layout_width="wrap_content"
