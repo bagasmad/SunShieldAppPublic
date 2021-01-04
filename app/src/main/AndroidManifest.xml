@@ -17,7 +17,6 @@
         <activity android:name=".DiagnoseActivity"></activity>
         <activity android:name=".OnBoardingActivity" />
         <activity android:name=".SettingsActivity" />
-        <activity android:name=".DebugActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

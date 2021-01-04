@@ -145,8 +145,8 @@ public class MainActivity extends AppCompatActivity {
         final String[] deskripsi = new String[1];
         final String[] suhu = new String[1];
         String uvUrl = "https://api.openuv.io/api/v1/uv?lat=" + a + "&lng=" + b;
-        String urlGoogle = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + a + "," + b + "&key=[API KEY]"; //Insert googlemaps API key here
-        String url = "https://api.openweathermap.org/data/2.5/onecall?lat=" + a + "&" + "lon=" + b + "&exclude=minutely,hourly,alerts&lang=id&units=metric&appid=bf7fb2daf9967369f55ff97981b61a34";
+        String urlGoogle = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + a + "," + b + "&key=[API KEY]"; //Insert Google Maps API key here
+        String url = "https://api.openweathermap.org/data/2.5/onecall?lat=" + a + "&" + "lon=" + b + "&exclude=minutely,hourly,alerts&lang=id&units=metric&appid=[API KEY]"; //Insert OpenWeatherMap API key here
 
         //CallOpenWeather for weather information
         new AsyncHttpClient().get(url, new AsyncHttpResponseHandler() {
@@ -192,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
         final Request request = new Request.Builder()
                 .url(uvUrl)
                 .get()
-                .addHeader("x-access-token", "3ea48624ebec42f85fe979340611e64e")
+                .addHeader("x-access-token", "[API KEY]") //Insert OpenUV API key here
                 .build();
 
         Log.i("request", request.toString());
@@ -283,11 +283,6 @@ public class MainActivity extends AppCompatActivity {
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
-    }
-
-    public void Debug(View view) {
-        Intent intent = new Intent(this, DebugActivity.class);
-        startActivity(intent);
     }
 
     public void Ingatkan(final View view) {
