@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
         final String[] deskripsi = new String[1];
         final String[] suhu = new String[1];
         String uvUrl = "https://api.openuv.io/api/v1/uv?lat=" + a + "&lng=" + b;
-        String urlGoogle = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + a + "," + b + "&key=AIzaSyA-55lZSPbg4P4hyXwD6SlTRGvaBxWh2ME";
+        String urlGoogle = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + a + "," + b + "&key=[API KEY]"; //Insert googlemaps API key here
         String url = "https://api.openweathermap.org/data/2.5/onecall?lat=" + a + "&" + "lon=" + b + "&exclude=minutely,hourly,alerts&lang=id&units=metric&appid=bf7fb2daf9967369f55ff97981b61a34";
 
         //CallOpenWeather for weather information

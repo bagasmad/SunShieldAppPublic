@@ -79,7 +79,7 @@ public class DiagnoseActivity extends AppCompatActivity {
         RequestBody requestBody = RequestBody.create(byteArray,MediaType.parse("image/*"));
         Request request = new Request.Builder()
                 .url(url)
-                .addHeader("Prediction-Key","88e98275c9314761b18793670f98b8d4")
+                .addHeader("Prediction-Key","") //Insert your Azure Cognitive Services Key
                 .addHeader("Content-Type","application/octet-stream")
                 .post(requestBody)
                 .build();
